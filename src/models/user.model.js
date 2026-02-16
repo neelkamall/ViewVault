@@ -1,8 +1,8 @@
 import mongoose, {Schema} from "mongoose";
 import brcypt from "bcrypt";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
-const userSchema = newSchema ({
+const userSchema = new Schema ({
   username:{
     type : String,
     required : true,
@@ -48,7 +48,7 @@ const userSchema = newSchema ({
 })
 
 userSchema.pre("save", async function (next) {
-  if(!this.ismodified("password")) return next();
+  if(!this.isModified("password")) return next();
   this.password = await brcypt.hash(this.password, 10)
   next()
 })
@@ -83,4 +83,4 @@ userSchema.methods.generateRefreshToken= function (){
 )
 }
 
-export const User = mongoose.model("User",videoSchema)
+export const User = mongoose.model("User",userSchema)
