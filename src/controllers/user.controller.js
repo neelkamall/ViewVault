@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import {ApiError} from "../utils/ApiError.js"
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import { ApiRespose } from "../utils/ApiRespose.js";
+import { ApiRespose } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken"
 
 
@@ -119,7 +119,7 @@ return res.status(201).json(
 
     const isPasswordValid = await user.isPasswordCorrect(password)
 
-    if (isPasswordValid) {
+    if (!isPasswordValid) {
       throw new ApiError(401, "Invalid user credentials")
     }
 
@@ -167,7 +167,7 @@ const logoutUser = asyncHandler(async(req, res)=>{
     return res
     .status(200)
     .clearCookie("accessToken", options)
-    .clearCookie("refrshToken", options)
+    .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User logged Out"))
     
 })
@@ -313,7 +313,7 @@ const updateUserCoverImage = asyncHandler(async(req, res) => {
     throw new ApiError(400, "Error while uploading on the image")
   }
 
-  const uder = await User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
       $set: {
@@ -321,7 +321,7 @@ const updateUserCoverImage = asyncHandler(async(req, res) => {
       }
     },
     {new: true}
-  ).select("-passsword")
+  ).select("-password")
 
   return res
   .status(200)
@@ -462,8 +462,9 @@ export {
   refreshAccessToken,
   changeCurrentPassword,
   getCurrentUser,
+  updateUserAvatar,
   updateAccountDetails,
-  updateUserCoverImage,
+  updateUserCoverImage, 
   getUserChannelProfile,
   getWatchHistory
 }

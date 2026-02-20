@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {
-    loginUser, 
+    
     logoutUser,
     registerUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, 
     updateUserAvatar,updateAccountDetails, updateUserCoverImage, getUserChannelProfile, getWatchHistory 
