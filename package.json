@@ -7,13 +7,13 @@
     "backend",
     "node"
   ],
-  "homepage": "https://github.com/neelkamall/Node.js#readme",
+  "homepage": "https://github.com/neelkamall/ViewVault#readme",
   "bugs": {
-    "url": "https://github.com/neelkamall/Node.js/issues"
+    "url": "https://github.com/neelkamall/ViewVault/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neelkamall/Node.js.git"
+    "url": "https://github.com/neelkamall/ViewVault.git"
   },
   "license": "ISC",
   "author": "neel kamal",
